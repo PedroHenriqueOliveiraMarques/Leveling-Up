@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leveling Up — Sua loja no digital</title>
+  <meta name="description" content="Leveling Up coloca pequenas empresas no digital com site, vitrine e vendas. Cadastro simples, planos acessíveis e atendimento humano." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Fundo aurora -->
+  <div class="aurora" aria-hidden="true">
+    <div class="aur blob blob-violet"></div>
+    <div class="aur blob blob-teal"></div>
+    <div class="aur blob blob-pink"></div>
+    <div class="aur blob blob-sky"></div>
+  </div>
+
+  <div class="page">
+    <!-- Cabeçalho -->
+    <header class="header">
+      <div class="header-bar">
+        <a href="#" class="brand">
+          <span class="brand-logo">Lu</span>
+          <span class="brand-name">Leveling up</span>
+        </a>
+        <button type="button" class="btn-glass" data-scroll-signup>Entrar</button>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <span class="badge"><span class="badge-dot"></span>Rola pro digital</span>
+      <h1>Seu negócio sobe de <span class="gradient-text">nível</span> pro digital.</h1>
+      <p class="lead">Cadastro em 2 minutos, plano sob medida e seu site no ar. Feito para pequenas empresas que querem expandir.</p>
+      <div class="hero-actions">
+        <button type="button" class="btn-primary" data-scroll-signup>Criar conta grátis</button>
+        <a href="#planos" class="btn-glass btn-block">Ver planos</a>
+      </div>
+    </section>
+
+    <!-- Planos -->
+    <section id="planos" class="section">
+      <div class="section-head">
+        <h2>Escolha seu plano</h2>
+        <span class="section-note">a partir de R$ 89/mês</span>
+      </div>
+      <div class="plans" id="plans-list"><!-- preenchido pelo script.js --></div>
+    </section>
+
+    <!-- Cadastro / fluxo -->
+    <section id="cadastro" class="section">
+      <div class="glass panel">
+        <!-- Indicador de etapas -->
+        <div class="steps" id="steps">
+          <div class="step" data-step="0"><span class="step-num">1</span><span class="step-label">Cadastro</span></div>
+          <div class="step" data-step="1"><span class="step-num">2</span><span class="step-label">Plano</span></div>
+          <div class="step" data-step="2"><span class="step-num">3</span><span class="step-label">Pagamento</span></div>
+        </div>
+
+        <!-- Etapa 1: cadastro -->
+        <div id="step-cadastro">
+          <h2>Crie sua conta</h2>
+          <p class="muted">Preencha seus dados para começar. Na próxima etapa você escolhe o plano.</p>
+          <form id="form-cadastro" class="form">
+            <label class="field">
+              <span>Nome completo</span>
+              <input required name="name" type="text" placeholder="Maria Souza" />
+            </label>
+            <label class="field">
+              <span>Nome do negócio</span>
+              <input required name="business" type="text" placeholder="Doceria da Ana" />
+            </label>
+            <label class="field">
+              <span>WhatsApp</span>
+              <input required name="phone" type="tel" placeholder="(11) 93735-5412" />
+            </label>
+            <button type="submit" class="btn-primary btn-block">Continuar para os planos</button>
+          </form>
+        </div>
+
+        <!-- Etapa 2: plano -->
+        <div id="step-plano" hidden>
+          <h2>Escolha seu plano</h2>
+          <p class="muted" id="plano-greeting">Selecione o plano ideal pro seu negócio.</p>
+          <div class="plan-options" id="plan-options"><!-- preenchido pelo script.js --></div>
+          <div class="row-actions">
+            <button type="button" class="btn-outline" id="btn-voltar-cadastro">Voltar</button>
+            <button type="button" class="btn-primary btn-flex" id="btn-ir-pagamento">Ir para o pagamento</button>
+          </div>
+        </div>
+
+        <!-- Etapa 3: pagamento -->
+        <div id="step-pagamento" hidden>
+          <h2>Finalizar pagamento</h2>
+          <p class="muted">Plano <strong class="fg" id="pay-plan-name"></strong> — <span id="pay-plan-price"></span>/mês</p>
+
+          <div class="pay-methods">
+            <button type="button" class="pay-method" data-method="pix">Pix</button>
+            <button type="button" class="pay-method" data-method="credito">Crédito</button>
+            <button type="button" class="pay-method" data-method="debito">Débito</button>
+          </div>
+
+          <div id="pay-pix" class="pay-box">
+            <p class="pay-label">Chave Pix</p>
+            <p class="pix-key" id="pix-key">55822830803</p>
+            <button type="button" class="btn-outline btn-block" id="btn-copy-pix">Copiar chave Pix</button>
+            <p class="pay-hint">Faça o Pix no valor de <span id="pix-price"></span> e confirme abaixo. Enviaremos o comprovante e os próximos passos pelo WhatsApp.</p>
+          </div>
+
+          <div id="pay-card" class="pay-box" hidden>
+            <label class="field">
+              <span class="field-sm">Número do cartão</span>
+              <input type="text" inputmode="numeric" placeholder="0000 0000 0000 0000" />
+            </label>
+            <div class="card-grid">
+              <label class="field">
+                <span class="field-sm">Validade</span>
+                <input type="text" placeholder="MM/AA" />
+              </label>
+              <label class="field">
+                <span class="field-sm">CVV</span>
+                <input type="text" placeholder="123" />
+              </label>
+            </div>
+          </div>
+
+          <div class="row-actions">
+            <button type="button" class="btn-outline" id="btn-voltar-plano">Voltar</button>
+            <button type="button" class="btn-primary btn-flex" id="btn-confirmar">Já fiz o Pix</button>
+          </div>
+        </div>
+
+        <!-- Etapa 4: concluído -->
+        <div id="step-concluido" hidden>
+          <div class="done-box">
+            <p class="done-title">Pedido recebido!</p>
+            <p class="muted" id="done-summary"></p>
+            <button type="button" class="btn-outline" id="btn-novo">Fazer novo cadastro</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="section">
+      <div class="glass panel">
+        <div class="section-head">
+          <h2 class="h2-sm">Fale com a gente</h2>
+          <span class="section-note">seg–sex, 9h–18h</span>
+        </div>
+        <div class="contact-list">
+          <a href="tel:+5511937355412" class="contact-item">
+            <span class="contact-icon icon-violet">✆</span>
+            <span>11 93735-5412</span>
+          </a>
+          <a href="mailto:levelingup@gmail.com" class="contact-item">
+            <span class="contact-icon icon-teal">✉</span>
+            <span>levelingup@gmail.com</span>
+          </a>
+        </div>
+        <div class="pay-flags">
+          <span class="muted-sm">Pagamos em:</span>
+          <span class="flag">Pix</span>
+          <span class="flag">Crédito</span>
+          <span class="flag">Débito</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+      <p class="footer-title">Fundadores</p>
+      <p class="muted">Miguel, Pedro, Igor, Palácio e Danilo</p>
+      <p class="footer-copy">© <span id="year"></span> Leveling up — sites que fazem sua empresa subir de nível.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
