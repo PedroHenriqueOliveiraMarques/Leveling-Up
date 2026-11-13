@@ -151,11 +151,71 @@ document.querySelectorAll("[data-scroll-signup]").forEach((btn) =>
   btn.addEventListener("click", scrollToSignup)
 );
 
-$("#form-cadastro").addEventListener("submit", (e) => {
+// Contas salvas no Lovable Cloud (chave pública, segura para o navegador)
+const sb = window.supabase.createClient(
+  "https://icbzsoymtiwkvuiakiwq.supabase.co",
+  "sb_publishable_uFHH9jmyIlhvZmdrvzKECQ_SE505I0K"
+);
+let authMode = "signup";
+document.querySelectorAll(".auth-tab").forEach((tab) =>
+  tab.addEventListener("click", () => {
+    authMode = tab.dataset.mode;
+    document.querySelectorAll(".auth-tab").forEach((t) => t.classList.toggle("active", t === tab));
+    const signup = authMode === "signup";
+    $("#signup-fields").hidden = !signup;
+    $("#signup-fields").querySelectorAll("input").forEach((i) => (i.required = signup));
+    $("#auth-title").textContent = signup ? "Crie sua conta" : "Entre na sua conta";
+    $("#auth-sub").textContent = signup ? "Preencha seus dados para começar. Na próxima etapa você escolhe o plano." : "Use o e-mail e a senha do seu cadastro.";
+    $("#auth-submit").textContent = signup ? "Criar conta e escolher plano" : "Entrar";
+    $("#auth-error").textContent = "";
+  })
+);
+
+function authMessage(msg) {
+  if (/invalid login/i.test(msg)) return "E-mail ou senha incorretos.";
+  if (/not confirmed/i.test(msg)) return "Confirme seu e-mail pelo link que enviamos antes de entrar.";
+  if (/already registered/i.test(msg)) return 'Esse e-mail já tem conta. Use "Já tenho conta".';
+  if (/password/i.test(msg)) return "A senha precisa ter pelo menos 6 caracteres e não pode ser fácil de adivinhar.";
+  return "Não foi possível continuar. Confira o e-mail e tente novamente.";
+}
+
+$("#form-cadastro").addEventListener("submit", async (e) => {
   e.preventDefault();
   const data = new FormData(e.target);
-  customerName = String(data.get("name") || "");
-  showStep("plano");
+  const email = String(data.get("email") || "").trim();
+  const password = String(data.get("password") || "");
+  const btn = $("#auth-submit");
+  const label = btn.textContent;
+  $("#auth-error").textContent = "";
+  btn.disabled = true;
+  btn.textContent = "Aguarde...";
+  try {
+    if (authMode === "signup") {
+      customerName = String(data.get("name") || "").trim();
+      const { data: res, error } = await sb.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: location.origin + location.pathname,
+          data: { name: customerName, business: String(data.get("business") || "").trim(), phone: String(data.get("phone") || "").trim() },
+        },
+      });
+      if (error) throw error;
+      if (!res.session) alert("Conta criada! Enviamos um link de confirmação para " + email + ". Confirme para poder entrar depois.");
+    } else {
+      const { data: res, error } = await sb.auth.signInWithPassword({ email, password });
+      if (error) throw error;
+      const { data: profile } = await sb.from("profiles").select("name").eq("id", res.user.id).maybeSingle();
+      customerName = (profile && profile.name) || "";
+    }
+    showStep("plano");
+  } catch (err) {
+    console.error(err);
+    $("#auth-error").textContent = authMessage(err && err.message ? err.message : "");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = label;
+  }
 });
 
 $("#btn-voltar-cadastro").addEventListener("click", () => showStep("cadastro"));

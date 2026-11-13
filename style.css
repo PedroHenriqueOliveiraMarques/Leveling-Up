@@ -620,3 +620,10 @@ button { font-family: inherit; cursor: pointer; }
 :focus-visible { outline:2px solid var(--teal); outline-offset:3px; }
 @media(max-width:640px) { .example-page{padding:1.25rem;} .example-heading h1{font-size:1.75rem;} .demo-grid{grid-template-columns:1fr;} .demo-header,.demo-details,.demo-footer{padding:1.25rem;} .demo-hero-copy{padding:3rem 1.25rem;max-width:340px;} .demo-hero h2{font-size:1.875rem;} .demo-hero{min-height:350px;} }
 @media(prefers-reduced-motion:reduce) { html{scroll-behavior:auto;} .aur{animation:none;} }
+
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;padding:.25rem;border:1px solid var(--border);border-radius:.75rem;margin-bottom:1rem}
+.auth-tab{background:transparent;border:0;color:var(--muted-fg);padding:.5rem;border-radius:.5rem;font:inherit;font-size:.875rem;cursor:pointer}
+.auth-tab.active{background:linear-gradient(90deg,var(--violet),var(--teal));color:var(--ink);font-weight:600}
+.auth-error{color:#f87171;font-size:.875rem;margin:0}
+.auth-error:empty{display:none}
+#signup-fields[hidden]{display:none}
