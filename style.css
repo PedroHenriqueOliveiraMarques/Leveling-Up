@@ -627,3 +627,31 @@ button { font-family: inherit; cursor: pointer; }
 .auth-error{color:#f87171;font-size:.875rem;margin:0}
 .auth-error:empty{display:none}
 #signup-fields[hidden]{display:none}
+
+/* Loja de exemplo (E-commerce) */
+.shop-banner{background:var(--example-accent);color:var(--example-on-image);text-align:center;font-size:.75rem;padding:.5rem 1rem;}
+.shop-trust{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;padding:1.25rem 2rem;border-bottom:1px solid var(--example-line);font-size:.875rem;}
+.shop-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1rem;}
+#shop-search{border:1px solid var(--example-line);background:var(--example-surface);color:var(--example-ink);border-radius:6px;padding:.65rem .8rem;font:inherit;width:min(100%,260px);}
+.shop-cats{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem;} .shop-cats .demo-nav{border:1px solid var(--example-line);}
+.shop-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1.25rem;}
+.shop-card{display:flex;flex-direction:column;border:1px solid var(--example-line);border-radius:8px;padding:1rem;}
+.shop-card-top{display:flex;justify-content:space-between;align-items:flex-start;font-size:1.75rem;}
+.shop-card em,.shop-table em{font-style:normal;font-size:.7rem;background:var(--example-line);border-radius:999px;padding:.2rem .55rem;}
+.shop-card small{font-size:.75rem;color:var(--example-muted);} .shop-card>p{flex:1;}
+.shop-price{margin:.25rem 0 .75rem;} .shop-price s{font-size:.75rem;color:var(--example-muted);} .shop-price small{display:block;}
+.shop-qty{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--example-line);border-radius:6px;font-size:.8125rem;}
+.shop-toast{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;border-top:1px solid var(--example-line);padding-top:1rem;color:var(--example-accent)!important;}
+.shop-stat{border:1px solid var(--example-line);border-radius:8px;padding:1rem;} .shop-stat small{display:block;font-size:.75rem;color:var(--example-muted);} .shop-stat b{font-size:1.25rem;}
+.shop-table{overflow-x:auto;margin-top:1.25rem;} .shop-table table{width:100%;border-collapse:collapse;font-size:.875rem;} .shop-table th{text-align:left;font-size:.75rem;color:var(--example-muted);padding:.5rem 0;} .shop-table td{border-top:1px solid var(--example-line);padding:.75rem .5rem .75rem 0;}
+.shop-overlay{position:fixed;inset:0;z-index:60;background:var(--example-scrim);display:flex;justify-content:flex-end;}
+.shop-drawer{width:min(440px,100%);height:100%;overflow:auto;background:var(--example-surface);color:var(--example-ink);padding:1.5rem;}
+.shop-drawer .demo-header{padding:0 0 1rem;} .shop-drawer h2{font-size:1.25rem;} .shop-drawer .demo-notice{color:var(--example-muted);}
+.shop-steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:1rem 0;padding:0;font-size:.75rem;}
+.shop-steps li{border-top:2px solid var(--example-line);padding-top:.5rem;color:var(--example-muted);} .shop-steps li.on{border-color:var(--example-accent);color:var(--example-ink);font-weight:600;}
+.shop-free{font-size:.75rem;margin-top:1rem;} .shop-bar{height:8px;border-radius:99px;background:var(--example-line);margin:.5rem 0 1rem;} .shop-bar i{display:block;height:100%;border-radius:99px;background:var(--example-accent);}
+.shop-summary{display:grid;grid-template-columns:1fr auto;gap:.3rem;border:1px solid var(--example-line);border-radius:8px;padding:1rem;font-size:.875rem;} .shop-summary dd{text-align:right;margin:0;}
+.demo-button.wide{width:100%;margin-top:1rem;} .shop-row{display:flex;gap:.5rem;margin-top:1rem;} .shop-row .demo-button{flex:1;}
+.shop-pay{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;} .shop-pay .demo-nav{border:1px solid var(--example-line);} .shop-hint{font-size:.75rem;color:var(--example-muted);margin:.75rem 0;}
+.shop-done{text-align:center;padding:1.5rem 0;} .shop-check{font-size:2.5rem;color:var(--example-accent);} .shop-done p{font-size:.875rem;color:var(--example-muted);margin:.75rem 0 1.25rem;}
+@media(max-width:640px){.shop-grid,.shop-trust{grid-template-columns:1fr;}.shop-trust{padding:1.25rem;}}
